@@ -73,6 +73,7 @@ method: "GET"
     console.log(response);
 });*/
 
+/*
 bookCovers does not need personal API key
 bookCoversURL = http://covers.openlibrary.org/b/$key/$value-$size.jpg
 where key, value, and size must be specified
