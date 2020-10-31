@@ -1,0 +1,25 @@
+
+
+/* .container {
+    min-height: 100%;
+    min-width: 100%;  
+} */
+
+#favorites {
+    background-color: green;
+    height: 600px;
+}
+#search {
+    background-color: blue;
+    width: 800px;
+    height: 200px;
+}
+#info {
+    background-color: red;
+    height: 375px;
+    width: 800px;
+}
+
+.ui-datepicker-trigger {  
+    max-height: 28px; 
+} 
