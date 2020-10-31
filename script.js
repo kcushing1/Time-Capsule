@@ -101,3 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
   instances = M.Datepicker.init(elems, options);
 }); 
 
+// Allows us to utilize the chosen date
+$("#start").on("click", function(){
+  let chosenDate = instances.toString();
+})
