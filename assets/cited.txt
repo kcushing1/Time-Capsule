@@ -1,2 +1,0 @@
-NBA call from:
-theapiguy. "Free NBA", rapidapi. Online <https://rapidapi.com/theapiguy/api/free-nba>

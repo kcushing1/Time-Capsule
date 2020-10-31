@@ -24,9 +24,9 @@ $.ajax({
   function displayArticles(){
     for (let i=0; i < 2; i++){
       //grab first three articles that are returned
-      let headline + i = articlesNYT[i].headline.main
+      let headline = articlesNYT[i].headline.main
       $(".headline" + i).append(`<h2>
-      ${headline + i}
+      ${headline}
       </h2>
       <h4 class="display-abstract abstract${i}>
       </h4>`)
@@ -61,15 +61,15 @@ $.ajax({
   let rateParis = responseCurrency.rates.EUR.toFixed(2)
   let rateTokyo = responseCurrency.rates.JPY.toFixed(2)
   let rateSaoPaulo = responseCurrency.rates.BRL.toFixed(2)
-  let ratesCapeTown = responseCurrency.rates.ZAR.toFixed(2)
-  console.log(rateNYC,rateParis,rateSaoPaulo,rateTokyo,ratesCapeTown)
+  let rateCapeTown = responseCurrency.rates.ZAR.toFixed(2)
+  console.log(rateNYC,rateParis,rateSaoPaulo,rateTokyo,rateCapeTown)
 
   //this also could look nicer
-  $("#new-york-city").append(`<p>$ ${rateNYC}</p`)
+  $("#new-york").append(`<p>$ ${rateNYC}</p`)
   $("#paris").append(`<p>€ ${rateParis}</p`)
-  $("#toyko").append(`<p>¥ ${rateTokyo}</p`)
+  $("#tokyo").append(`<p>¥ ${rateTokyo}</p`)
   $("#sao-paulo").append(`<p>R$ ${rateSaoPaulo}</p`)
-  $("#cape-town").append(`<p>R ${ratesCapeTown}</p`)
+  $("#cape-town").append(`<p>R ${rateCapeTown}</p`)
 })
 }
 
