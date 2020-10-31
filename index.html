@@ -6,19 +6,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Calendar Information -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Capsule</title>
-  
 </head>
 
 <body>
-    
     <!-- Header Container -->
+
+
 
     <!-- Information Container -->
     <div class="container">
@@ -28,35 +24,26 @@
             </div>
             <div class="col s9">
                 <div class="row" id="search">
-                    <div class="container" style="max-width: 250px;">
-                        <div class="form-group m-1">
-                            <label class="font-weight-bold" for="dob">
-                                Pick a date:
-                            </label>
-
-                            <!-- Input field along with  
-                            calendar icon and -->
-                            <div class="input-group date">
-                                <!-- Sets the calendar icon -->
-                                <input type="text" class="datepicker">
-                            </div>
-                            <br>
-                            <button id="start">submit</button>
-                        </div>
-
-                    </div>
+                    <input type="text" class="datepicker">
                 </div>
                 <div class="row" id="info">
-                    
+                    <div class="col s1"></div>
+                    <div class="col s2" id="new-york"></div>
+                    <div class="col s2" id="paris"></div>
+                    <div class="col s2" id="tokyo"></div>
+                    <div class="col s2" id="sao-paulo"></div>
+                    <div class="col s2" id="cape-town"></div>
+                </div>
+                <div class="row" id="articles"></div>
                 </div>
             </div>
         </div>
     </div>
 
 
-
     <!-- Footer Container -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="script.js"></script>
 
 </body>
