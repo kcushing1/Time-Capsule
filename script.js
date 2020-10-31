@@ -75,24 +75,32 @@ $.ajax({
 
 searchCurrency()
 
-/* API key for Visual Crossing Weather
+// API key for Visual Crossing:
 //let APIKeyVC = "HFS2SKT2Y8KUVY6FAG6KJAZ6";
-//New York Query
-let queryURLforNY = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?aggregateHours=24&combinationMethod=aggregate&startDateTime=2020-10-22T00%3A00%3A00&endDateTime=2020-10-22T00%3A00%3A00&maxStations=-1&maxDistance=-1&contentType=json&unitGroup=us&locationMode=single&key=HFS2SKT2Y8KUVY6FAG6KJAZ6S&dataElements=default&locations=New%20York%2C%20New%20York"
 
+// plug in user specified date as the value into varible below. It will need to be in this format (YYYY-MM-DD) and a string i.e. may need to use .toString()
+let date = "2020-10-22" 
+
+//query for all 5 locations at once:
+let queryURLforWeather = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?aggregateHours=24&combinationMethod=aggregate&startDateTime=" + date + "T00%3A00%3A00&endDateTime=" + date + "T00%3A00%3A00&maxStations=-1&maxDistance=-1&contentType=json&unitGroup=us&locationMode=array&key=HFS2SKT2Y8KUVY6FAG6KJAZ6S&dataElements=default&locations=New%20York%2C%20New%20York%7CSao%20Paulo%2C%20Brazil%7CParis%2C%20France%7CTokyo%2C%20Japan%7CCape%20Town%2C%20South%20Africa"
+
+
+// function for weather query; spits out City Name and Temp (in Fahrenheit) for each city 
+function searchVisualCrossing () {
 $.ajax({
-url: queryURLforNY,
-method: "GET"
+    url: queryURLforWeather,
+    method: "GET"
 })
-.then(function(response) {
-    console.log(response);
-});*/
+    .then(function(response) {
+        let r = response.locations
+        $("#new-york").append("<p>" + r[4].id + ", Temp = " + r[4].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH </p>")
+        $("#paris").append("<p>" + r[1].id + ", Temp = " + r[1].values[0].temp + " F, windspeed = " + r[4].values[0].wspd +"MPH </p>")
+        $("#tokyo").append("<p>" + r[0].id + ", Temp = " + r[0].values[0].temp + " F, windspeed = " + r[4].values[0].wspd +"MPH </p>")
+        $("#sao-paulo").append("<p>" + r[3].id + ", Temp = " + r[3].values[0].temp + " F, windspeed = " + r[4].values[0].wspd +"MPH </p>")
+        $("#cape-town").append("<p>" + r[2].id + ", Temp = " + r[2].values[0].temp + " F, windspeed = " + r[4].values[0].wspd +"MPH </p>")
+}
 
-/*
-bookCovers does not need personal API key
-bookCoversURL = http://covers.openlibrary.org/b/$key/$value-$size.jpg
-where key, value, and size must be specified
-*/
+searchVisualCrossing();
 
 function parallax_height() {
     var scroll_top = $(this).scrollTop();
