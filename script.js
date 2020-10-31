@@ -15,15 +15,17 @@ $.ajax({
 })
 .then (function (responseNYT) {
   console.log(responseNYT)
-  let articles = responseNYT.response.docs//auto response 10 items
-  /*
+  let articlesNYT = responseNYT.response.docs//auto response 10 items
+  $("#articles").append(`<div class="headline0></div>
+  <div class="headline0></div>
+  <div class="headline0></div>`)
   displayArticles()
   //show three articles on the page
   function displayArticles(){
     for (let i=0; i < 2; i++){
       //grab first three articles that are returned
-      let headline + i = articles[i].headline.main
-      $(".healine" + i +"-here").append(`<h2>
+      let headline + i = articlesNYT[i].headline.main
+      $(".headline" + i).append(`<h2>
       ${headline + i}
       </h2>
       <h4 class="display-abstract abstract${i}>
@@ -42,7 +44,6 @@ $.ajax({
   })
 }
 
-  */
 })//close NYT ajax response
 }//close searchNYT function
 
@@ -62,6 +63,13 @@ $.ajax({
   let rateSaoPaulo = responseCurrency.rates.BRL.toFixed(2)
   let ratesCapeTown = responseCurrency.rates.ZAR.toFixed(2)
   console.log(rateNYC,rateParis,rateSaoPaulo,rateTokyo,ratesCapeTown)
+
+  //this also could look nicer
+  $("#new-york-city").append(`<p>$ ${rateNYC}</p`)
+  $("#paris").append(`<p>€ ${rateParis}</p`)
+  $("#toyko").append(`<p>¥ ${rateTokyo}</p`)
+  $("#sao-paulo").append(`<p>R$ ${rateSaoPaulo}</p`)
+  $("#cape-town").append(`<p>R ${ratesCapeTown}</p`)
 })
 }
 
