@@ -1,8 +1,12 @@
-let keyNYT = "rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2"
-let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
-//date yyyymmdd
+//var for year
+//var for month
+//var for day
 
-let currencyURL = "https://api.exchangeratesapi.io/2010-01-12?base=USD" //date YYYY-MM-DD
+//let NYTDate = selectYear + selectMonth + selectDay
+let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
+
+//let currencyDate = selectYear + "-" + selectMonth + "-" + selectDay
+let currencyURL = "https://api.exchangeratesapi.io/2010-01-12?base=USD"
 
 function searchNYT(){
 $.ajax({
@@ -11,8 +15,36 @@ $.ajax({
 })
 .then (function (responseNYT) {
   console.log(responseNYT)
-})
+  let articles = responseNYT.response.docs//auto response 10 items
+  /*
+  displayArticles()
+  //show three articles on the page
+  function displayArticles(){
+    for (let i=0; i < 2; i++){
+      //grab first three articles that are returned
+      let headline + i = articles[i].headline.main
+      $(".healine" + i +"-here").append(`<h2>
+      ${headline + i}
+      </h2>
+      <h4 class="display-abstract abstract${i}>
+      </h4>`)
+  }
+  //I know, I know, this is sloppy but I haven't figured out how to make it neater
+  //when clicked, the abstract for that article displays
+  $(".abstract0").on("click", function(){
+    $(".abstract0").text(articles[0].abstract)
+  })
+  $(".abstract1").on("click", function(){
+    $(".abstract1").text(articles[1].abstract)
+  })
+  $(".abstract2").on("click", function(){
+    $(".abstract2").text(articles[2].abstract)
+  })
 }
+
+  */
+})//close NYT ajax response
+}//close searchNYT function
 
 searchNYT()
 
@@ -34,36 +66,6 @@ $.ajax({
 }
 
 searchCurrency()
-/*
-function searchBasketball(){
-  $.ajax({
-    url: NBAsearchURL,
-    method: "GET"
-  })
-  .then (function(responseBasketball){
-    console.log(responseBasketball)
-  })
-  
-}*/
-
-searchBasketballGiven()
-//see cited.txt for code source
-function searchBasketballGiven(){
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://free-nba.p.rapidapi.com/games/20190201", //date YYYY-MM-DD
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "free-nba.p.rapidapi.com",
-      "x-rapidapi-key": "7443a0383dmshd40080ac3c98240p1424a5jsn2542bbf6efd6"
-    }
-  }
-  
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
-}
 
 /* API key for Visual Crossing Weather
 //let APIKeyVC = "HFS2SKT2Y8KUVY6FAG6KJAZ6";
