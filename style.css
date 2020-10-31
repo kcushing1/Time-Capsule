@@ -1,49 +1,60 @@
-
-
 /* .container {
-    min-height: 100%;
-    min-width: 100%;  
+  min-height: 100%;
+  min-width: 100%;  
 } */
 
-/* #favorites {
+#favorites {
     background-color: green;
     height: 600px;
-}
-#search {
+  }
+  #search {
     background-color: blue;
     width: 800px;
     height: 200px;
-}
-#info {
-    background-color: red;
+  }
+  #info {
     height: 375px;
     width: 800px;
-} */
-
-.ui-datepicker-trigger {  
-    max-height: 28px; 
-} 
-
-#new-york {
     background-color: red;
-}
-
-#paris {
-    background-color: orange;
-}
-
-#tokyo {
-    background-color: yellow;
-}
-
-#sao-paulo {
-    background-color: green;
-}
-
-#cape-town {
-    background-color: blue;
-}
-
-#articles {
+  } 
+  
+  .ui-datepicker-trigger {  
+    max-height: 28px; 
+  } 
+  
+  #new-york {
     background-color: purple;
-}
+    height: 150px;
+    width: 200px;
+  }
+  
+  #paris {
+    background-color: orange;
+    height: 150px;
+    width: 200px;
+  }
+  
+  #tokyo {
+    background-color: yellow;
+    height: 150px;
+    width: 200px;
+  }
+  
+  #sao-paulo {
+    background-color: white;
+    height: 150px;
+    width: 200px;
+  }
+  
+  #cape-town {
+    background-color: palevioletred;
+    height: 150px;
+    width: 200px;
+  }
+  
+  #articles {
+    background-color: gray;
+    height: 150px;
+    width: 200px;
+  
+  }
