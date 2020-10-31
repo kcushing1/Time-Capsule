@@ -2,9 +2,7 @@ let keyNYT = "rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2"
 let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
 //date yyyymmdd
 
-let currencyURL = "https://api.exchangeratesapi.io/2010-01-12" //date YYYY-MM-DD
-
-let NBAsearchURL = "https://free-nba.p.rapidapi.com/games/%7Bid%7D" //date YYYY-MM-DD
+let currencyURL = "https://api.exchangeratesapi.io/2010-01-12?base=USD" //date YYYY-MM-DD
 
 function searchNYT(){
 $.ajax({
@@ -25,11 +23,18 @@ $.ajax({
 })
 .then (function (responseCurrency){
   console.log(responseCurrency)
+  let rateNYC = responseCurrency.rates.USD
+  //note that .toFixed(2) converts to a string; USD is 1
+  let rateParis = responseCurrency.rates.EUR.toFixed(2)
+  let rateTokyo = responseCurrency.rates.JPY.toFixed(2)
+  let rateSaoPaulo = responseCurrency.rates.BRL.toFixed(2)
+  let ratesCapeTown = responseCurrency.rates.ZAR.toFixed(2)
+  console.log(rateNYC,rateParis,rateSaoPaulo,rateTokyo,ratesCapeTown)
 })
 }
 
 searchCurrency()
-
+/*
 function searchBasketball(){
   $.ajax({
     url: NBAsearchURL,
@@ -39,15 +44,15 @@ function searchBasketball(){
     console.log(responseBasketball)
   })
   
-}
+}*/
 
 searchBasketballGiven()
-
+//see cited.txt for code source
 function searchBasketballGiven(){
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://free-nba.p.rapidapi.com/games/20100201",
+    "url": "https://free-nba.p.rapidapi.com/games/20190201", //date YYYY-MM-DD
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "free-nba.p.rapidapi.com",
