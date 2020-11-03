@@ -31,24 +31,56 @@ $.ajax({
   }
   //I know, I know, this is sloppy but I haven't figured out how to make it neater
   //when clicked, the abstract for that article displays
-  $("#abstract0").on("click", function(){
-    $("#abstract0").text(articlesNYT[0].abstract)
+  //OR display headline with abstract...and maybe a picture?
+  $(".abstract0").on("click", function(){
+    $(".abstract0").text(articlesNYT[0].abstract)
   })
-  $("#abstract1").on("click", function(){
-    $("#abstract1").text(articlesNYT[1].abstract)
+  $(".abstract1").on("click", function(){
+    $(".abstract1").text(articlesNYT[1].abstract)
   })
-  $("#abstract2").on("click", function(){
-    $("#abstract2").text(articlesNYT[2].abstract)
+  $(".abstract2").on("click", function(){
+    $(".abstract2").text(articlesNYT[2].abstract)
   })
+
 }
   articleNYT0 = articleNYT[0].web_url
   articleNYT1 = articleNYT[1].web_url
   articleNYT3 = articleNYT[2].web_url
 
+//save article abstract and web url link to localstorage
+//this might be a problem when we search different dates...
+//add date to name somehow? (probs the better option)
+//add article info as object to an array, store the array?
+  for (let j=0; j < 3; j++){
+    let articlelink = articlesNYT[j].web_url
+    let articleabstract = articlesNYT[j].abstract
+    localStorage.setItem("articlelink"+j, articlelink)
+    localStorage.setItem("articleabstract"+j, articleabstract)
+  }
+
 })//close NYT ajax response
 }//close searchNYT function
 
 searchNYT()
+
+//read later, onclick display to Read Later
+//displays snippet/abstract and link
+//each button gets own event listener...
+//make one event listener work before adding the others
+$("#read-later-0").on("click", function(){
+  let readlinkzero = localStorage.getItem("articlelink0")
+  let readabstractzero = localStorage.getItem("articleabstract0")
+  $("#read-later").append(`
+    <div>
+      <h3>${readabstractzero}</h3>
+      <p>
+        <a href="${readlinkzero}" target="_blank">
+        Read Article Here
+      </p>
+    </div>`)
+})
+
+
 
 function searchCurrency(){
 $.ajax({
@@ -93,12 +125,12 @@ $.ajax({
 })
     .then(function(response) {
         let r = response.locations
-        $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-}
+        $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+})}
 
 searchVisualCrossing();
 
@@ -116,11 +148,10 @@ function parallax_height() {
   $(window).resize(function() {
     parallax_height();
   });
-
+    
 
 document.addEventListener('DOMContentLoaded', function() {
   let elems = document.querySelectorAll('.datepicker');
   let options = {format: 'yyyy-mm-dd'};
   instances = M.Datepicker.init(elems, options);
-}); 
-
+})
