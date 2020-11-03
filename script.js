@@ -30,9 +30,6 @@ $.ajax({
       </h2>
       <h4 class="display-abstract abstract${i}>
       </h4>`)
-
-      console.log(articlesNYT[i].snippet)
-      console.log(articlesNYT[i].abstract)
   }
   //I know, I know, this is sloppy but I haven't figured out how to make it neater
   //when clicked, the abstract for that article displays
@@ -51,7 +48,7 @@ $.ajax({
 
 //save article abstract and web url link to localstorage
 //this might be a problem when we search different dates...
-//add date to name somehow?
+//add date to name somehow? (probs the better option)
 //add article info as object to an array, store the array?
   for (let j=0; j < 3; j++){
     let articlelink = articlesNYT[j].web_url
@@ -128,11 +125,11 @@ $.ajax({
 })
     .then(function(response) {
         let r = response.locations
-        $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
-        $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " F, windspeed = " + r[4].values[0].wspd + "MPH")
+        $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
 })}
 
 searchVisualCrossing();
