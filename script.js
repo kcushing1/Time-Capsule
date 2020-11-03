@@ -16,20 +16,18 @@ $.ajax({
 .then (function (responseNYT) {
   console.log(responseNYT)
   let articlesNYT = responseNYT.response.docs//auto response 10 items
-  $("#articles").append(`<div class="headline0></div>
-  <div class="headline0></div>
-  <div class="headline0></div>`)
+ 
   displayArticles()
   //show three articles on the page
   function displayArticles(){
-    for (let i=0; i < 2; i++){
+    for (let i=0; i < 3; i++){
       //grab first three articles that are returned
       let headline = articlesNYT[i].headline.main
-      $(".headline" + i).append(`<h2>
+      $("#article" + i).append(`<p>
       ${headline}
-      </h2>
-      <h4 class="display-abstract abstract${i}>
-      </h4>`)
+      </p>
+      <p id="abstract${i}">
+      </p>`)
   }
   //I know, I know, this is sloppy but I haven't figured out how to make it neater
   //when clicked, the abstract for that article displays
@@ -45,6 +43,9 @@ $.ajax({
   })
 
 }
+  articleNYT0 = articleNYT[0].web_url
+  articleNYT1 = articleNYT[1].web_url
+  articleNYT3 = articleNYT[2].web_url
 
 //save article abstract and web url link to localstorage
 //this might be a problem when we search different dates...
@@ -94,7 +95,6 @@ $.ajax({
   let rateTokyo = responseCurrency.rates.JPY.toFixed(2)
   let rateSaoPaulo = responseCurrency.rates.BRL.toFixed(2)
   let rateCapeTown = responseCurrency.rates.ZAR.toFixed(2)
-  console.log(rateNYC,rateParis,rateSaoPaulo,rateTokyo,rateCapeTown)
 
   //this also could look nicer
   $("#new-york").append(`<p>$ ${rateNYC}</p`)
