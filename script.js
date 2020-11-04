@@ -143,8 +143,13 @@ document.addEventListener('DOMContentLoaded', function() {
   let elems = document.querySelectorAll('.datepicker');
   let options = {format: 'yyyy-mm-dd'};
   instances = M.Datepicker.init(elems, options);
-})
 
+}); 
+
+// Allows us to utilize the chosen date
+$("#start").on("click", function(){
+  let chosenDate = instances.toString();
+})
 
 displayReadLater()
 
