@@ -162,4 +162,3 @@ $("#start").on("click", function(){
   let chosenDate = instances.toString();
 })
 
-})
