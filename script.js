@@ -1,7 +1,6 @@
 //var for year
 //var for month
 //var for day
-let storeReadLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles")) || []
 
 //let NYTDate = selectYear + selectMonth + selectDay
 let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
@@ -48,6 +47,13 @@ $(".read-later").on("click", function(){
     abstract: readlater,
     webURL: readlaterURL
   }
+
+  if (localStorage.getItem(JSON.parse("ReadArticlesLater")) == ""){
+    storeReadLaterArr = []
+  } else {
+    storeReadLaterArr = localStorage.getItem(JSON.parse("ReadArticlesLater"))
+  }
+
   storeReadLaterArr.push(storeReadLater)
   if (storeReadLaterArr.length > 8){
     storeReadLaterArr.split(0)
@@ -138,3 +144,29 @@ document.addEventListener('DOMContentLoaded', function() {
   let options = {format: 'yyyy-mm-dd'};
   instances = M.Datepicker.init(elems, options);
 })
+
+
+displayReadLater()
+
+function displayReadLater(){
+    if (localStorage.getItem("ReadArticlesLater")){
+    let readLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles"))
+  
+    for (let j = 0; j< readLaterArr.length; j++){
+      let grabReadLater = readLaterArr[j].abstract
+      let grabReadLaterURL = readLaterArr[j].webURL
+      $("#read-later").append(`
+      <div>
+        <h4>${grabReadLater}</h4>
+        <p>
+          <a href="${grabReadLaterURL}" target="_blank">
+            Read Article Here
+        </p>
+      </div>`)
+    }
+  } else {
+    $("#read-later").html(`
+    <p>Too busy right now? Select some articles you'd like to read later!
+    </p>`)
+  }
+}
