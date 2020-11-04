@@ -1,6 +1,7 @@
 //var for year
 //var for month
 //var for day
+let storeReadLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles")) || []
 
 //let NYTDate = selectYear + selectMonth + selectDay
 let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
@@ -25,12 +26,12 @@ $.ajax({
       let headline = articlesNYT[i].headline.main
       let abstractNYT = articlesNYT[i].abstract
       let articleURL = articlesNYT[i].web_url
-      $("#article" + i).append(`<p>
+      $("#articles").append(`<p>
       ${headline}
       </p>
-      <p id="abstract${i}">${abstractNYT}
+      <p class="abstract">${abstractNYT}
       </p>
-      <p id="weburl${i}" class="hidden">${articleURL}
+      <p class="hidden weburl">${articleURL}
       </p>`)
     }
   }
@@ -40,7 +41,28 @@ $.ajax({
 searchNYT()
 
 //on click, $this grab abstract and url
+$(".read-later").on("click", function(){
+  let readlater = $(this).find(".abstract").text
+  let readlaterURL = $(this).find(".weburl").text
+  let storeReadLater = {
+    abstract: readlater,
+    webURL: readlaterURL
+  }
+  storeReadLaterArr.push(storeReadLater)
+  if (storeReadLaterArr.length > 8){
+    storeReadLaterArr.split(0)
+  }
 
+  $("#read-later").append(`
+  <div>
+    <h4>${readlater}</h4>
+    <p>
+      <a href="${readlaterURL}" target="_blank">
+        Read Article Here
+    </p>
+  </div>`)
+  localStorage.setItem(JSON.stringify("ReadLaterArticles",storeReadLater))
+})
 
 
 function searchCurrency(){
