@@ -1,11 +1,9 @@
 body {
     background-color: #4dd0e1   ;
-  }
-
+}
 .ui-datepicker-trigger {  
     max-height: 28px; 
 } 
-  
 #read-later-header {
     color: white;
     font-size: 26px;
