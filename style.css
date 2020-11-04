@@ -1,6 +1,9 @@
 body {
     background-color: #4dd0e1   ;
 }
+.hidden {
+    display: none;
+}
 .ui-datepicker-trigger {  
     max-height: 28px; 
 } 

@@ -14,7 +14,6 @@ $.ajax({
   method: "GET"
 })
 .then (function (responseNYT) {
-  console.log(responseNYT)
   let articlesNYT = responseNYT.response.docs//auto response 10 items
  
   displayArticles()
@@ -25,9 +24,8 @@ $.ajax({
       let headline = articlesNYT[i].headline.main
       let abstractNYT = articlesNYT[i].abstract
       let articleURL = articlesNYT[i].web_url
-      $("#articles").append(`<p>
-      ${headline}
-      </p>
+      $("#article-title-"+i).html(headline)
+      $(".card-content-"+i).append(`
       <p class="abstract">${abstractNYT}
       </p>
       <p class="hidden weburl">${articleURL}
@@ -41,6 +39,7 @@ searchNYT()
 
 //on click, $this grab abstract and url
 $(".read-later").on("click", function(){
+  console.log("article onclick connected")
   let readlater = $(this).find(".abstract").text
   let readlaterURL = $(this).find(".weburl").text
   let storeReadLater = {
@@ -48,10 +47,10 @@ $(".read-later").on("click", function(){
     webURL: readlaterURL
   }
 
-  if (localStorage.getItem(JSON.parse("ReadArticlesLater")) == ""){
-    storeReadLaterArr = []
+  if (localStorage.getItem("ReadArticlesLater")){
+      storeReadLaterArr = localStorage.getItem(JSON.parse("ReadArticlesLater"))
   } else {
-    storeReadLaterArr = localStorage.getItem(JSON.parse("ReadArticlesLater"))
+      storeReadLaterArr = []
   }
 
   storeReadLaterArr.push(storeReadLater)
@@ -77,7 +76,6 @@ $.ajax({
   method: "GET"
 })
 .then (function (responseCurrency){
-  console.log(responseCurrency)
   let rateNYC = responseCurrency.rates.USD
   //note that .toFixed(2) converts to a string; USD is 1
   let rateParis = responseCurrency.rates.EUR.toFixed(2)
@@ -86,11 +84,11 @@ $.ajax({
   let rateCapeTown = responseCurrency.rates.ZAR.toFixed(2)
 
   //this also could look nicer
-  $("#new-york").append(`<p>$ ${rateNYC}</p`)
-  $("#paris").append(`<p>€ ${rateParis}</p`)
-  $("#tokyo").append(`<p>¥ ${rateTokyo}</p`)
-  $("#sao-paulo").append(`<p>R$ ${rateSaoPaulo}</p`)
-  $("#cape-town").append(`<p>R ${rateCapeTown}</p`)
+  $("#new-york-currency").html(`$ ${rateNYC}`)
+  $("#paris-currency").html(`€ ${rateParis}`)
+  $("#tokyo-currency").html(`¥ ${rateTokyo}`)
+  $("#sao-paulo-currency").html(`R$ ${rateSaoPaulo}`)
+  $("#cape-town-currency").html(`R ${rateCapeTown}`)
 })
 }
 
@@ -114,11 +112,11 @@ $.ajax({
 })
     .then(function(response) {
         let r = response.locations
-        $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-        $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-        $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-        $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-        $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+        $("#new-york-weather").html(r[4].id + ", Temperature: " + r[4].values[0].temp + " °F, Wind Speed: " + r[4].values[0].wspd + "MPH")
+        $("#paris-weather").html(r[1].id + ", Temperature: " + r[1].values[0].temp + " °F, Wind Speed: " + r[1].values[0].wspd + "MPH")
+        $("#tokyo-weather").html(r[0].id + ", Temperature: " + r[0].values[0].temp + " °F, Wind Speed: " + r[0].values[0].wspd + "MPH")
+        $("#sao-paulo-weather").html(r[3].id + ", Temperature: " + r[3].values[0].temp + " °F, Wind Speed: " + r[3].values[0].wspd + "MPH")
+        $("#cape-town-weather").html(r[2].id + ", Temperature: " + r[2].values[0].temp + " °F, Wind Speed: " + r[2].values[0].wspd + "MPH")
 })}
 
 searchVisualCrossing();
