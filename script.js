@@ -23,63 +23,52 @@ $.ajax({
     for (let i=0; i < 3; i++){
       //grab first three articles that are returned
       let headline = articlesNYT[i].headline.main
-      $("#article" + i).append(`<p>
+      let abstractNYT = articlesNYT[i].abstract
+      let articleURL = articlesNYT[i].web_url
+      $("#articles").append(`<p>
       ${headline}
       </p>
-      <p id="abstract${i}">
+      <p class="abstract">${abstractNYT}
+      </p>
+      <p class="hidden weburl">${articleURL}
       </p>`)
+    }
   }
-  //I know, I know, this is sloppy but I haven't figured out how to make it neater
-  //when clicked, the abstract for that article displays
-  //OR display headline with abstract...and maybe a picture?
-  $(".abstract0").on("click", function(){
-    $(".abstract0").text(articlesNYT[0].abstract)
-  })
-  $(".abstract1").on("click", function(){
-    $(".abstract1").text(articlesNYT[1].abstract)
-  })
-  $(".abstract2").on("click", function(){
-    $(".abstract2").text(articlesNYT[2].abstract)
-  })
-
-}
-  articleNYT0 = articleNYT[0].web_url
-  articleNYT1 = articleNYT[1].web_url
-  articleNYT3 = articleNYT[2].web_url
-
-//save article abstract and web url link to localstorage
-//this might be a problem when we search different dates...
-//add date to name somehow? (probs the better option)
-//add article info as object to an array, store the array?
-  for (let j=0; j < 3; j++){
-    let articlelink = articlesNYT[j].web_url
-    let articleabstract = articlesNYT[j].abstract
-    localStorage.setItem("articlelink"+j, articlelink)
-    localStorage.setItem("articleabstract"+j, articleabstract)
-  }
-
 })//close NYT ajax response
 }//close searchNYT function
 
 searchNYT()
 
-//read later, onclick display to Read Later
-//displays snippet/abstract and link
-//each button gets own event listener...
-//make one event listener work before adding the others
-$("#read-later-0").on("click", function(){
-  let readlinkzero = localStorage.getItem("articlelink0")
-  let readabstractzero = localStorage.getItem("articleabstract0")
-  $("#read-later").append(`
-    <div>
-      <h3>${readabstractzero}</h3>
-      <p>
-        <a href="${readlinkzero}" target="_blank">
-        Read Article Here
-      </p>
-    </div>`)
-})
+//on click, $this grab abstract and url
+$(".read-later").on("click", function(){
+  let readlater = $(this).find(".abstract").text
+  let readlaterURL = $(this).find(".weburl").text
+  let storeReadLater = {
+    abstract: readlater,
+    webURL: readlaterURL
+  }
 
+  if (localStorage.getItem(JSON.parse("ReadArticlesLater")) == ""){
+    storeReadLaterArr = []
+  } else {
+    storeReadLaterArr = localStorage.getItem(JSON.parse("ReadArticlesLater"))
+  }
+
+  storeReadLaterArr.push(storeReadLater)
+  if (storeReadLaterArr.length > 8){
+    storeReadLaterArr.split(0)
+  }
+
+  $("#read-later").append(`
+  <div>
+    <h4>${readlater}</h4>
+    <p>
+      <a href="${readlaterURL}" target="_blank">
+        Read Article Here
+    </p>
+  </div>`)
+  localStorage.setItem(JSON.stringify("ReadLaterArticles",storeReadLater))
+})
 
 
 function searchCurrency(){
@@ -162,3 +151,27 @@ $("#start").on("click", function(){
   let chosenDate = instances.toString();
 })
 
+displayReadLater()
+
+function displayReadLater(){
+    if (localStorage.getItem("ReadArticlesLater")){
+    let readLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles"))
+  
+    for (let j = 0; j< readLaterArr.length; j++){
+      let grabReadLater = readLaterArr[j].abstract
+      let grabReadLaterURL = readLaterArr[j].webURL
+      $("#read-later").append(`
+      <div>
+        <h4>${grabReadLater}</h4>
+        <p>
+          <a href="${grabReadLaterURL}" target="_blank">
+            Read Article Here
+        </p>
+      </div>`)
+    }
+  } else {
+    $("#read-later").html(`
+    <p>Too busy right now? Select some articles you'd like to read later!
+    </p>`)
+  }
+}
