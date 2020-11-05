@@ -37,52 +37,47 @@ $.ajax({
 
 searchNYT()
 
-//on click, $this grab abstract and url
+//on click, grab abstract and url
+
 $(".save-article-0").on("click", function(){
-  console.log("article onclick connected")
   readlater = $(".abstract0").text()
   readlaterURL = $(".weburl0").text()
-  storeReadLater = {
-    abstract: readlater,
-    webURL: readlaterURL
-  }
-appendArticles()
+ appendArticles()
 })
 
 $(".save-article-1").on("click", function(){
-  console.log("article onclick connected")
   readlater = $(".abstract1").text()
   readlaterURL = $(".weburl1").text()
-  storeReadLater = {
-    abstract: readlater,
-    webURL: readlaterURL
-  }
 appendArticles()
 })
 
 $(".save-article-2").on("click", function(){
-  console.log("article onclick connected")
   readlater = $(".abstract2").text()
   readlaterURL = $(".weburl2").text()
-  storeReadLater = {
-    abstract: readlater,
-    webURL: readlaterURL
-  }
 appendArticles()
 })
 
 function appendArticles(){
+  //grab the abstract and url and make an object
+  storeReadLater = {
+    abstract: readlater,
+    webURL: readlaterURL
+  }
+
+  //if there is anything in localStorage, grab it; if not []
   if (localStorage.getItem("ReadArticlesLater")){
     storeReadLaterArr = JSON.parse(localStorage.getItem("ReadArticlesLater"))
 } else {
     storeReadLaterArr = []
 }
 
+//add articles to localStorage
 storeReadLaterArr.push(storeReadLater)
 if (storeReadLaterArr.length > 8){
   storeReadLaterArr.split(0)
 }
 
+//display read later article in read later column
 $("#read-later").append(`
 <div>
   <p>${readlater}</p>
@@ -92,6 +87,7 @@ $("#read-later").append(`
   </p>
 </div>`)
 
+//save the array with new article to local storage
 localStorage.setItem("ReadLaterArticles",JSON.stringify(storeReadLater))
 }
 
