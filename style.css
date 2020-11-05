@@ -2,6 +2,9 @@ body {
     background: linear-gradient(to bottom, #2de3fb 0%, #858585 93%);
 }
 
+.hidden {
+    display: none;
+}
 
 .ui-datepicker-trigger {  
     max-height: 28px; 
