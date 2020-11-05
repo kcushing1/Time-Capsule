@@ -26,9 +26,9 @@ $.ajax({
       let articleURL = articlesNYT[i].web_url
       $("#article-title-"+i).html(headline)
       $(".card-content-"+i).append(`
-      <p class="abstract">${abstractNYT}
+      <p class="abstract${i}">${abstractNYT}
       </p>
-      <p class="hidden weburl">${articleURL}
+      <p class="hidden weburl${i}">${articleURL}
       </p>`)
     }
   }
@@ -38,37 +38,62 @@ $.ajax({
 searchNYT()
 
 //on click, $this grab abstract and url
-$(".read-later").on("click", function(){
+$(".save-article-0").on("click", function(){
   console.log("article onclick connected")
-  let readlater = $(this).find(".abstract").text
-  let readlaterURL = $(this).find(".weburl").text
-  let storeReadLater = {
+  readlater = $(".abstract0").text()
+  readlaterURL = $(".weburl0").text()
+  storeReadLater = {
     abstract: readlater,
     webURL: readlaterURL
   }
-
-  if (localStorage.getItem("ReadArticlesLater")){
-      storeReadLaterArr = localStorage.getItem(JSON.parse("ReadArticlesLater"))
-  } else {
-      storeReadLaterArr = []
-  }
-
-  storeReadLaterArr.push(storeReadLater)
-  if (storeReadLaterArr.length > 8){
-    storeReadLaterArr.split(0)
-  }
-
-  $("#read-later").append(`
-  <div>
-    <h4>${readlater}</h4>
-    <p>
-      <a href="${readlaterURL}" target="_blank">
-        Read Article Here
-    </p>
-  </div>`)
-  localStorage.setItem(JSON.stringify("ReadLaterArticles",storeReadLater))
+appendArticles()
 })
 
+$(".save-article-1").on("click", function(){
+  console.log("article onclick connected")
+  readlater = $(".abstract1").text()
+  readlaterURL = $(".weburl1").text()
+  storeReadLater = {
+    abstract: readlater,
+    webURL: readlaterURL
+  }
+appendArticles()
+})
+
+$(".save-article-2").on("click", function(){
+  console.log("article onclick connected")
+  readlater = $(".abstract2").text()
+  readlaterURL = $(".weburl2").text()
+  storeReadLater = {
+    abstract: readlater,
+    webURL: readlaterURL
+  }
+appendArticles()
+})
+
+function appendArticles(){
+  if (localStorage.getItem("ReadArticlesLater")){
+    storeReadLaterArr = JSON.parse(localStorage.getItem("ReadArticlesLater"))
+} else {
+    storeReadLaterArr = []
+}
+
+storeReadLaterArr.push(storeReadLater)
+if (storeReadLaterArr.length > 8){
+  storeReadLaterArr.split(0)
+}
+
+$("#read-later").append(`
+<div>
+  <p>${readlater}</p>
+  <p>
+    <a href="${readlaterURL}" target="_blank">
+      Read Article Here
+  </p>
+</div>`)
+
+localStorage.setItem("ReadLaterArticles",JSON.stringify(storeReadLater))
+}
 
 function searchCurrency(){
 $.ajax({
@@ -111,6 +136,7 @@ $.ajax({
     method: "GET"
 })
     .then(function(response) {
+      console.log(response)
         let r = response.locations
         $("#new-york-weather").html(r[4].id + ", Temperature: " + r[4].values[0].temp + " °F, Wind Speed: " + r[4].values[0].wspd + "MPH")
         $("#paris-weather").html(r[1].id + ", Temperature: " + r[1].values[0].temp + " °F, Wind Speed: " + r[1].values[0].wspd + "MPH")
@@ -154,22 +180,28 @@ displayReadLater()
 function displayReadLater(){
     if (localStorage.getItem("ReadArticlesLater")){
     let readLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles"))
+
+    console.log(readLaterArr)
   
     for (let j = 0; j< readLaterArr.length; j++){
       let grabReadLater = readLaterArr[j].abstract
       let grabReadLaterURL = readLaterArr[j].webURL
+
+      console.log(grabReadLater + " is abstract")
+      console.log(grabReadLaterURL +"is URL")
+
       $("#read-later").append(`
       <div>
-        <h4>${grabReadLater}</h4>
+        <h6>${grabReadLater}</h6>
         <p>
           <a href="${grabReadLaterURL}" target="_blank">
             Read Article Here
         </p>
       </div>`)
     }
+    $("#welcome-to-read-later").addClass("hidden")
   } else {
-    $("#read-later").html(`
-    <p>Too busy right now? Select some articles you'd like to read later!
-    </p>`)
+    console.log("local storage says "+ localStorage.getItem("ReadArticlesLater"))
+    console.log("nothing in readLaterArr")
   }
 }
