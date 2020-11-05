@@ -174,8 +174,8 @@ $("#start").on("click", function(){
 displayReadLater()
 
 function displayReadLater(){
-    if (localStorage.getItem("ReadArticlesLater")){
-    let readLaterArr = localStorage.getItem(JSON.parse("ReadLaterArticles"))
+    if (localStorage.getItem("ReadLaterArticles")){
+    let readLaterArr = JSON.parse(localStorage.getItem("ReadLaterArticles"))
 
     console.log(readLaterArr)
   
@@ -197,7 +197,7 @@ function displayReadLater(){
     }
     $("#welcome-to-read-later").addClass("hidden")
   } else {
-    console.log("local storage says "+ localStorage.getItem("ReadArticlesLater"))
+    console.log("local storage says "+ localStorage.getItem("ReadLaterArticles"))
     console.log("nothing in readLaterArr")
   }
 }
