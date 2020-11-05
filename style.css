@@ -2,13 +2,8 @@ body {
     background: linear-gradient(to bottom, #2de3fb 0%, #858585 93%);
 }
 
-#full-width {
-  width: 100%;
-  max-width: fit-content;
-}
-
-.center {
-    text-align: center;
+.hidden {
+    display: none;
 }
 
 .ui-datepicker-trigger {  
