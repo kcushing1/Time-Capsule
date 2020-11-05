@@ -1,13 +1,17 @@
-//var for year
-//var for month
-//var for day
+//Initializes calendar
+document.addEventListener('DOMContentLoaded', function() {
+  let elems = document.querySelectorAll('.datepicker');
+  let options = {format: 'yyyy-mm-dd'};
+  instances = M.Datepicker.init(elems, options);
 
-//let NYTDate = selectYear + selectMonth + selectDay
-let NYTsearchURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20100101&end_date=20100102&api-key=rLqQ8GexB2ARIBGSMsR1ieuF8ElHABR2";
+}); 
 
-//let currencyDate = selectYear + "-" + selectMonth + "-" + selectDay
-let currencyURL = "https://api.exchangeratesapi.io/2010-01-12?base=USD"
-
+// Click event to submit date and run API calls
+$("#start").on("click", function(){
+  //date variables to plug into API URL calls
+  let chosenDate = instances.toString();
+  let noDashDate = chosenDate.replaceAll("-", "")
+  
 function searchNYT(){
 $.ajax({
   url: NYTsearchURL,
@@ -31,11 +35,61 @@ $.ajax({
       <p class="hidden weburl${i}">${articleURL}
       </p>`)
     }
-  }
-})//close NYT ajax response
-}//close searchNYT function
+  })//close NYT ajax response
+  }//close searchNYT function
 
-searchNYT()
+  searchNYT()
+
+  //Currency Exchange variable and function
+  let currencyURL = "https://api.exchangeratesapi.io/" + chosenDate + "?base=USD"
+
+  function searchCurrency(){
+  $.ajax({
+    url: currencyURL,
+    method: "GET"
+  })
+  .then (function (responseCurrency){
+    console.log(responseCurrency)
+    let rateNYC = responseCurrency.rates.USD
+    //note that .toFixed(2) converts to a string; USD is 1
+    let rateParis = responseCurrency.rates.EUR.toFixed(2)
+    let rateTokyo = responseCurrency.rates.JPY.toFixed(2)
+    let rateSaoPaulo = responseCurrency.rates.BRL.toFixed(2)
+    let rateCapeTown = responseCurrency.rates.ZAR.toFixed(2)
+
+    //this also could look nicer
+    $("#new-york").append(`<p>$ ${rateNYC}</p`)
+    $("#paris").append(`<p>€ ${rateParis}</p`)
+    $("#tokyo").append(`<p>¥ ${rateTokyo}</p`)
+    $("#sao-paulo").append(`<p>R$ ${rateSaoPaulo}</p`)
+    $("#cape-town").append(`<p>R ${rateCapeTown}</p`)
+  })
+  }
+
+  searchCurrency()
+
+  // Visual Crossing Weather variable and function
+
+  //query for all 5 locations at once:
+  let queryURLforWeather = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?aggregateHours=24&combinationMethod=aggregate&startDateTime=" + chosenDate + "T00%3A00%3A00&endDateTime=" + chosenDate + "T00%3A00%3A00&maxStations=-1&maxDistance=-1&contentType=json&unitGroup=us&locationMode=array&key=HFS2SKT2Y8KUVY6FAG6KJAZ6S&dataElements=default&locations=New%20York%2C%20New%20York%7CSao%20Paulo%2C%20Brazil%7CParis%2C%20France%7CTokyo%2C%20Japan%7CCape%20Town%2C%20South%20Africa"
+
+  // function for weather query; spits out City Name and Temp (in Fahrenheit) for each city 
+  function searchVisualCrossing () {
+  $.ajax({
+      url: queryURLforWeather,
+      method: "GET"
+  })
+      .then(function(response) {
+          let r = response.locations
+          $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+          $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[1].values[0].wspd + "MPH")
+          $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[0].values[0].wspd + "MPH")
+          $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[3].values[0].wspd + "MPH")
+          $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[2].values[0].wspd + "MPH")
+  })}
+
+  searchVisualCrossing();
+})
 
 //on click, grab abstract and url
 
@@ -157,20 +211,10 @@ function parallax_height() {
   $(window).resize(function() {
     parallax_height();
   });
+})(jQuery); 
+// parallax end
     
-
-document.addEventListener('DOMContentLoaded', function() {
-  let elems = document.querySelectorAll('.datepicker');
-  let options = {format: 'yyyy-mm-dd'};
-  instances = M.Datepicker.init(elems, options);
-
-}); 
-
-// Allows us to utilize the chosen date
-$("#start").on("click", function(){
-  let chosenDate = instances.toString();
-})
-
+//Functino to add display articles if there are any in local storage
 displayReadLater()
 
 function displayReadLater(){

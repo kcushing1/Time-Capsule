@@ -1,9 +1,11 @@
 body {
-    background-color: #4dd0e1   ;
+    background: linear-gradient(to bottom, #2de3fb 0%, #858585 93%);
 }
+
 .hidden {
     display: none;
 }
+
 .ui-datepicker-trigger {  
     max-height: 28px; 
 } 
@@ -11,7 +13,7 @@ body {
     color: white;
     font-size: 26px;
     font-weight: bold;
-    background-color: #28b5f4;
+    background-color: #A9A9A9;
     border-radius: 12px;
     text-align: center;
     padding-bottom: 5px;
@@ -71,7 +73,7 @@ body {
     color: white;
     font-size: 26px;
     font-weight: bold;
-    background-color: #28b5f4;
+    background-color: #A9A9A9;
     border-radius: 12px;
     text-align: center;
     padding: 5px;
@@ -103,3 +105,40 @@ body {
 #right-column {
     padding-left: 50px;
 }
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255,255,255,.9);
+  }
+    .parallax-container .section {
+      width: 100%;
+    }
+  
+  @media only screen and (max-width : 992px) {
+    .parallax-container .section {
+      position: absolute;
+      top: 40%;
+    }
+    #index-banner .section {
+      top: 10%;
+    }
+  }
+  
+  @media only screen and (max-width : 600px) {
+    #index-banner .section {
+      top: 0;
+    }
+  }
+  
+  .icon-block {
+    padding: 0 15px;
+  }
+  .icon-block .material-icons {
+    font-size: inherit;
+  }
+  
+  footer.page-footer {
+    margin: 0;
+  }
