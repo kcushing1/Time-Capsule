@@ -191,6 +191,5 @@ function displayReadLater(){
         </p>
       </div>`)
     }
-    $("#welcome-to-read-later").addClass("hidden")
   } 
 }
