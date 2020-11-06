@@ -21,7 +21,6 @@ $("#start").on("click", function(){
     method: "GET"
   })
   .then (function (responseNYT) {
-    console.log(responseNYT)
     let articlesNYT = responseNYT.response.docs//auto response 10 items
   
     displayArticles()
@@ -55,7 +54,6 @@ $("#start").on("click", function(){
     method: "GET"
   })
   .then (function (responseCurrency){
-    console.log(responseCurrency)
     let rateNYC = responseCurrency.rates.USD
     //note that .toFixed(2) converts to a string; USD is 1
     let rateParis = responseCurrency.rates.EUR.toFixed(2)
@@ -162,7 +160,8 @@ localStorage.setItem("ReadLaterArticles",JSON.stringify(storeReadLater))
 })(jQuery); 
 // parallax end
     
-//Functino to add display articles if there are any in local storage
+//Function to add display articles if there are any in local storage
+//for refresh of page
 displayReadLater()
 
 function displayReadLater(){
@@ -188,8 +187,5 @@ function displayReadLater(){
       </div>`)
     }
     $("#welcome-to-read-later").addClass("hidden")
-  } else {
-    console.log("local storage says "+ localStorage.getItem("ReadLaterArticles"))
-    console.log("nothing in readLaterArr")
-  }
+  } 
 }
