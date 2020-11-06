@@ -62,11 +62,11 @@ $("#start").on("click", function(){
     let rateCapeTown = responseCurrency.rates.ZAR.toFixed(2)
 
     //this also could look nicer
-    $("#new-york").append(`<p>$ ${rateNYC}</p`)
-    $("#paris").append(`<p>€ ${rateParis}</p`)
-    $("#tokyo").append(`<p>¥ ${rateTokyo}</p`)
-    $("#sao-paulo").append(`<p>R$ ${rateSaoPaulo}</p`)
-    $("#cape-town").append(`<p>R ${rateCapeTown}</p`)
+    $("#new-york-currency").html(`<p>$ ${rateNYC}</p`)
+    $("#paris-currency").html(`<p>€ ${rateParis}</p`)
+    $("#tokyo-currency").html(`<p>¥ ${rateTokyo}</p`)
+    $("#sao-paulo-currency").html(`<p>R$ ${rateSaoPaulo}</p`)
+    $("#cape-town-currency").html(`<p>R ${rateCapeTown}</p`)
   })
   }
 
@@ -85,11 +85,11 @@ $("#start").on("click", function(){
   })
       .then(function(response) {
           let r = response.locations
-          $("#new-york").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-          $("#paris").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[1].values[0].wspd + "MPH")
-          $("#tokyo").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[0].values[0].wspd + "MPH")
-          $("#sao-paulo").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[3].values[0].wspd + "MPH")
-          $("#cape-town").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[2].values[0].wspd + "MPH")
+          $("#new-york-weather").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
+          $("#paris-weather").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[1].values[0].wspd + "MPH")
+          $("#tokyo-weather").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[0].values[0].wspd + "MPH")
+          $("#sao-paulo-weather").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[3].values[0].wspd + "MPH")
+          $("#cape-town-weather").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[2].values[0].wspd + "MPH")
   })}
 
   searchVisualCrossing();
