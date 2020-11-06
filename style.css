@@ -18,7 +18,7 @@ body {
     text-align: center;
     padding-bottom: 5px;
     box-shadow: 2px 2px 5px #383838;
-    margin: 20px;
+    margin-top: 13px;
 }
 
 #read-later {
@@ -30,14 +30,14 @@ body {
     text-align: center;
     padding-top: 1px;
     box-shadow: 2px 2px 5px #383838;
-    margin: 20px;
 }
 
 #search-card {
     border-radius: 12px;
     padding-bottom: 10px;
     box-shadow: 2px 2px 5px #383838;
-    width: 25%;
+    width: 300px;
+    margin-left: 290px;
 }
 
 #start {
@@ -103,10 +103,7 @@ body {
 }
 
 #right-column {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
+    padding-left: 50px;
 }
 
 .parallax-container {
