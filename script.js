@@ -133,13 +133,14 @@ function appendArticles(){
   }
 
   //if there is anything in localStorage, grab it; if not []
-  if (localStorage.getItem("ReadArticlesLater")){
-    storeReadLaterArr = JSON.parse(localStorage.getItem("ReadArticlesLater"))
+  if (localStorage.getItem("ReadLaterArticles")){
+    storeReadLaterArr = [JSON.parse(localStorage.getItem("ReadLaterArticles"))]
+    console.log(storeReadLaterArr)
 } else {
     storeReadLaterArr = []
 }
 
-//add articles to localStorage
+//add articles to localStorage, max 8 articles
 storeReadLaterArr.push(storeReadLater)
 if (storeReadLaterArr.length > 8){
   storeReadLaterArr.split(0)
@@ -176,7 +177,7 @@ displayReadLater()
 
 function displayReadLater(){
     if (localStorage.getItem("ReadLaterArticles")){
-    let readLaterArr = JSON.parse(localStorage.getItem("ReadLaterArticles"))
+    let readLaterArr = [JSON.parse(localStorage.getItem("ReadLaterArticles"))]
   
     for (let j = 0; j< readLaterArr.length; j++){
       let grabReadLater = readLaterArr[j].abstract
