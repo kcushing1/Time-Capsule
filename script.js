@@ -167,15 +167,10 @@ displayReadLater()
 function displayReadLater(){
     if (localStorage.getItem("ReadLaterArticles")){
     let readLaterArr = JSON.parse(localStorage.getItem("ReadLaterArticles"))
-
-    console.log(readLaterArr)
   
     for (let j = 0; j< readLaterArr.length; j++){
       let grabReadLater = readLaterArr[j].abstract
       let grabReadLaterURL = readLaterArr[j].webURL
-
-      console.log(grabReadLater + " is abstract")
-      console.log(grabReadLaterURL +"is URL")
 
       $("#read-later").append(`
       <div>
