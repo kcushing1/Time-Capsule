@@ -31,13 +31,9 @@ $("#start").on("click", function(){
         let headline = articlesNYT[i].headline.main
         let abstractNYT = articlesNYT[i].abstract
         let articleURL = articlesNYT[i].web_url
-        $("#articles").append(`<p>
-        ${headline}
-        </p>
-        <p class="abstract">${abstractNYT}
-        </p>
-        <p class="hidden weburl">${articleURL}
-        </p>`)
+        $("#article-title-"+i).html(headline)
+        $(".card-content-"+i).append(`<p class='abstract${i}'>${abstractNYT}</p>
+        <p class='hidden weburl${i}'>${articleURL}</p>`)
       }
     }
   })//close NYT ajax response
