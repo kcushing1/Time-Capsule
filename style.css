@@ -6,6 +6,15 @@ body {
     display: none;
 }
 
+p {
+  font-weight: bold;
+}
+
+.go-center {
+  margin-left: 850px;
+  font-weight: bold;
+}
+
 .ui-datepicker-trigger {  
     max-height: 28px; 
 } 
@@ -67,7 +76,7 @@ body {
     font-weight: bold;
     box-shadow: 2px 2px 5px #383838;
     width: 100%;
-    margin-left: 90px;
+    margin-left: 110px;
 }
 
 .new-york, .paris, .tokyo, .sao-paulo, .cape-town {
@@ -75,7 +84,7 @@ body {
     border-radius: 8px;
     box-shadow: 2px 2px 5px #383838;
     text-align: center;
-    margin-left: 90px;
+    margin-left: 110px;
     width: 100%;
 }
 
