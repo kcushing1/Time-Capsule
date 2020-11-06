@@ -85,11 +85,25 @@ $("#start").on("click", function(){
   })
       .then(function(response) {
           let r = response.locations
-          $("#new-york-weather").html(r[4].id + ", Temp = " + r[4].values[0].temp + " °F, Wind Speed = " + r[4].values[0].wspd + "MPH")
-          $("#paris-weather").html(r[1].id + ", Temp = " + r[1].values[0].temp + " °F, Wind Speed = " + r[1].values[0].wspd + "MPH")
-          $("#tokyo-weather").html(r[0].id + ", Temp = " + r[0].values[0].temp + " °F, Wind Speed = " + r[0].values[0].wspd + "MPH")
-          $("#sao-paulo-weather").html(r[3].id + ", Temp = " + r[3].values[0].temp + " °F, Wind Speed = " + r[3].values[0].wspd + "MPH")
-          $("#cape-town-weather").html(r[2].id + ", Temp = " + r[2].values[0].temp + " °F, Wind Speed = " + r[2].values[0].wspd + "MPH")
+          $("#new-york-weather").html(`<p>
+          Temperature: ${r[4].values[0].temp} °F</p>
+          <p>Wind Speed: ${r[4].values[0].wspd} mph </p>`)
+
+          $("#paris-weather").html(`<p>
+          Temperature: ${r[1].values[0].temp} °F</p>
+          <p>Wind Speed: ${r[1].values[0].wspd} mph</p>`)
+
+          $("#tokyo-weather").html(`<p>
+          Temperature: ${r[0].values[0].temp} °F</p>
+          <p>Wind Speed: ${r[0].values[0].wspd} mph</p>`)
+
+          $("#sao-paulo-weather").html(`<p>
+          Temperature: ${r[3].values[0].temp} °F</p>
+          <p>Wind Speed: ${r[3].values[0].wspd} mph</p>`)
+
+          $("#cape-town-weather").html(`<p>
+          Temperature: ${r[2].values[0].temp} °F</p>
+          <p>Wind Speed: ${r[2].values[0].wspd} mph</p>`)
   })}
 
   searchVisualCrossing();
